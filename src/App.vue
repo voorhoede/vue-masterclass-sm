@@ -19,6 +19,10 @@ import SearchForm from './components/search-form.vue';
 import SearchSidebar from './components/search-sidebar.vue';
 import UserProfile from './components/user-profile.vue';
 
+window.chat = {
+    messages : []
+}
+
 export default {
     components: {
         AppHeader,
@@ -31,6 +35,18 @@ export default {
         SearchForm,
         SearchSidebar,
         UserProfile
-    }
+    },
+
+    // make window.chat reactive here and try to manipulate it through the browser devtools
+
+    watch : {
+        newProp() {
+            console.log('newProp was added/changed');
+        },
+
+        messages(newValue, oldValue) {
+            console.log(`messages changed to ${newValue}`);
+        }
+    },
 }
 </script>

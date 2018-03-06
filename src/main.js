@@ -12,6 +12,6 @@ const app = new Vue({
 });
 
 //uncomment the next line
-//app.$mount('.app');
+app.$mount('.app');
 
 Vue.config.devtools = true;
