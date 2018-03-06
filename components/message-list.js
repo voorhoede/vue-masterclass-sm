@@ -11,11 +11,16 @@ Vue.component('message-list', {
 
     template : `
         <div class="message-list">
+<<<<<<< HEAD
             <div v-if="messages.length === 0" class="message-list__empty">
+=======
+            <div class="message-list__empty">
+>>>>>>> feat: exercise 3
                 No messages
             </div>
 
             <ol class="message-list__list">
+<<<<<<< HEAD
                 <message 
                     v-for="message of messages" 
                     :key="message.id" 
@@ -25,6 +30,9 @@ Vue.component('message-list', {
                     :user="message.user"
                     >
                 </message>
+=======
+                <message></message>
+>>>>>>> feat: exercise 3
             </ol>
         </div>
     `
