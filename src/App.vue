@@ -51,8 +51,7 @@ export default {
         SearchSidebar,
         UserProfile
     },
-
-    // make window.chat reactive here and try to manipulate it through the browser devtools
+    
     data() {
         return window.chat;
     },
