@@ -16,7 +16,8 @@ Vue.component('chat-section', {
         createMessage() {
             return {
                 date : new Date(),
-                user : this.userId
+                user : this.userId,
+                channel : this.currentChannel
             }
         },
 

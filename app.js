@@ -29,15 +29,8 @@ window.api = new Api();
 window.chat = {
     userId : null,
     users : [],
-    channels : [
-        {
-            name : 'Daily'
-        },
-        {
-            name : 'General'
-        }
-    ],
-    currentChannel : 'Daily',
+    channels : [],
+    currentChannel : null,
     messages : [],
     searching : false,
     searchText : ''
@@ -63,34 +56,59 @@ window.app = new Vue({
 
     created() {
         window.api.init()
-            .then(({userId, users, messages}) => {
+            .then(({userId, users}) => {
                 this.users = users;
                 this.userId = userId;
-                this.messages = messages.map(message => {
-                    return Object.assign({}, message, {
-                        user : this.users.find(user => user._id === message.user)
-                    });
-                });
 
-                window.api.startStream(doc => {
-                    if(doc.type === 'message') {
-                        doc.user = this.users.find(user => user._id === doc.user);
-                        patchArray(this.messages, doc);
-                    }
-                    else {
-                        patchArray(this.users, doc);
-                    }
+                return this.getChannels();
+            })
+            .then(() => {
+                if(this.currentChannel) {
+                    return this.getChannelMessages();
+                }
+            })
+    },
+
+    methods : {
+        async getChannels() {
+            const channels = await window.api.getChannels();
+            this.channels = channels;
+            this.currentChannel = channels[0]._id || null;
+        },
+
+        async getChannelMessages() {
+            this.messages = [];
+
+            if(this.stream) {
+                this.stream.close();
+            }
+
+            const messages = await window.api.getChannelMessages(this.currentChannel);
+
+            this.messages = messages.map(message => {
+                return Object.assign({}, message, {
+                    user : this.users.find(user => user._id === message.user)
                 });
             });
+
+            this.stream = window.api.startStream({channelId : this.currentChannel}, doc => {
+                if(doc.type === 'message') {
+                    doc.user = this.users.find(user => user._id === doc.user);
+                    patchArray(this.messages, doc);
+                }
+                else if(doc.type === 'channel') {
+                    patchArray(this.channels, doc);
+                }
+                else if(doc.type === 'user') {
+                    patchArray(this.users, doc);
+                }
+            });
+        }
     },
 
     watch : {
-        newProp() {
-            console.log('newProp was added/changed');
-        },
-
-        messages(newValue, oldValue) {
-            console.log(`messages changed to ${newValue}`);
+        currentChannel(newValue) {
+            this.getChannelMessages(newValue);
         }
     },
 

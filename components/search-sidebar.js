@@ -15,7 +15,9 @@ Vue.component('search-sidebar', {
 
     computed : {
         filteredMessages() {
-            return this.messages.filter(message => message.text.indexOf(this.searchText) > -1);
+            return this.messages.filter(message => {
+                return message.text && message.text.indexOf(this.searchText) > -1;
+            });
         },
         header() {
             return `${this.filteredMessages.length} Message` + (this.filteredMessages.length !== 1 ? 's' : '');

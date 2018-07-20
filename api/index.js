@@ -39,9 +39,7 @@ export default class {
             await this.createUser(userId);
         }
 
-        const messages = await this.getAllMessages();
-
-        return {userId, users, messages};
+        return {userId, users};
     }
 
     createUser(id) {
@@ -104,8 +102,20 @@ export default class {
             });
     }
 
-    getAllMessages() {
-        return fetch(`${host}/messages/_design/messages_sorted/_view/messages_sorted?include_docs=true`)
+    getChannels() {
+        return fetch(`${host}/messages/_design/channels/_view/channels?include_docs=true`)
+            .then(res => res.json())
+            .then(data => {
+                return data.rows.map(({doc}) => {
+                    return doc;
+                });
+            });
+    }
+
+    getChannelMessages(channelId) {
+        const startKey = JSON.stringify([channelId]);
+        const endKey = JSON.stringify([`${channelId}\uffff`]);
+        return fetch(`${host}/messages/_design/messages_sorted/_view/messages_sorted?include_docs=true&startkey=${startKey}&endkey=${endKey}`)
             .then(res => res.json())
             .then(data => {
                 return data.rows.map(({doc}) => {
@@ -114,17 +124,21 @@ export default class {
             });
     }
 
-    startStream(callback) {
+    startStream({channelId}, callback) {
         const stream = new EventSource(`${host}/messages/_changes?feed=eventsource&include_docs=true&since=now`);
         stream.addEventListener('message', (e) => {
             const data = JSON.parse(e.data);
             if(data.doc.type === 'message') {
+                if(data.doc.channel !== channelId) {
+                    return;
+                }
                 callback( fixMessage(data.doc) );
             }
             else {
                 callback( data.doc );
             }
         });
+        return stream;
     }
 
     addMessage(message) {
@@ -133,6 +147,19 @@ export default class {
         return fetch(`${host}/messages`, {
                 method : 'POST',
                 body : JSON.stringify(message),
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            })
+            .then(res => res.json());
+    }
+
+    addChannel(name) {
+        const channel = {type : 'channel', name};
+
+        return fetch(`${host}/messages`, {
+                method : 'POST',
+                body : JSON.stringify(channel),
                 headers : {
                     'Content-Type' : 'application/json'
                 }
