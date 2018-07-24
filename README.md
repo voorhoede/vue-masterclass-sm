@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# Exercise 1
-
-Split the app into components.
-=======
 # Exercise 2
 
 Look at the ui in the browser and determine the data structure for your slack clone.
@@ -12,4 +7,3 @@ Try the following things:
 - Add or remove an item from the message array. Either through the browser console or the devtools
 - Change an item in the message array. What happens?
 - Add a new property called 'newProp' through the browser console. What happens?
->>>>>>> feat: add readme
