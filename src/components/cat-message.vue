@@ -1,4 +1,11 @@
-Vue.component('cat-message', {
+<template>
+    <message v-bind:user="user" v-bind:date="date">
+        <img slot="content" src="http://thecatapi.com/api/images/get?format=src&type=gif">
+    </message>
+</template>
+
+<script>
+export default {
     props : {
         user : {
             type : Object,
@@ -11,11 +18,6 @@ Vue.component('cat-message', {
             type : Date,
             required : true
         }
-    },
-
-    template : `
-        <message v-bind:user="user" v-bind:date="date">
-            <img slot="content" src="http://thecatapi.com/api/images/get?format=src&type=gif">
-        </message>
-    `
-});
+    }
+}
+</script>
