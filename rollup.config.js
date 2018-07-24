@@ -13,7 +13,9 @@ export default {
     plugins: [
         vue(),
         serve(),
-        resolve(),
+        resolve({
+            extensions: ['.js', '.vue']
+        }),
         livereload(),
         replace({
             'process.env.NODE_ENV': JSON.stringify('development'),
