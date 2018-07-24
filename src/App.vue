@@ -20,7 +20,22 @@ import SearchSidebar from './components/search-sidebar.vue';
 import UserProfile from './components/user-profile.vue';
 
 window.chat = {
-    messages : []
+    user : {
+        name : "Anoniempje",
+        avatar : "./images/avatar.png"
+    },
+    channels : [
+        {
+            name : 'Daily'
+        },
+        {
+            name : 'General'
+        }
+    ],
+    currentChannel : 'Daily',
+    messages : [],
+    searching : false,
+    searchText : ''
 }
 
 export default {
@@ -38,6 +53,9 @@ export default {
     },
 
     // make window.chat reactive here and try to manipulate it through the browser devtools
+    data() {
+        return window.chat;
+    },
 
     watch : {
         newProp() {
