@@ -14,7 +14,6 @@ import MessageList from "./message-list"
 
 function createMessage(text) {
   let message = {
-    text,
     user: {
       name: 'Remco',
       avatar: ''

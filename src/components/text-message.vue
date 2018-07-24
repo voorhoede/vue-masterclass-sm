@@ -5,7 +5,12 @@
 </template>
 
 <script>
+import Message from './message';
+
 export default {
+    components: {
+        Message
+    },
     props : {
         user : {
             type : Object,
@@ -23,4 +28,5 @@ export default {
             required : true
         }
     }
-});
+};
+</script>

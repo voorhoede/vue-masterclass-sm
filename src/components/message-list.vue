@@ -6,13 +6,7 @@
     </div>
     
     <ol class="message-list__list" v-else>
-      <message v-for="message of messages"
-        v-bind:key="message.id"
-        v-bind:text="message.text" 
-        v-bind:user="message.user" 
-        v-bind:date="message.date"
-      >
-      
+     
       <template v-for="message of messages">
           <text-message 
               v-if="message.type === 'text'"
@@ -30,7 +24,6 @@
           </cat-message>
       </template>
       
-      </message>
     </ol>
   </div>
 </template>

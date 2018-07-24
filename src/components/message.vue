@@ -7,7 +7,7 @@
       <span class="message__date">{{ date }}</span>
     </div>
     <div class="message__content">
-      
+      <slot name="content"></slot>
     </div>
   </li>
 </template>
