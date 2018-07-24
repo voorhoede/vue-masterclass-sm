@@ -23,6 +23,8 @@ export default {
         - emit a custom event to the chat-section (with the entered text)
         - in the chat-section bind to the custom event and use the createMessage method to add the message to the messages array
       */
+     this.$emit('submit', this.text);
+     this.text = '';
     }
   }
 }

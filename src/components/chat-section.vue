@@ -5,7 +5,7 @@
       <message-list v-bind:messages="messages"></message-list>
     </div>
     <!-- bind to the custom event of the message-field -->
-    <message-field class="chat-section__field"></message-field>
+    <message-field @submit="onSubmitMessage" class="chat-section__field"></message-field>
   </section>
 </template>
 
@@ -34,6 +34,10 @@ export default {
   },
   methods: {
     //create a handler for the custom event
+    onSubmitMessage(text) {
+      const message = createMessage(text);
+      this.messages.push(message);
+    }
   }
 }
 </script>
