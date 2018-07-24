@@ -51,10 +51,6 @@ export default {
         SearchSidebar,
         UserProfile
     },
-    
-    data() {
-        return window.chat;
-    },
 
     watch : {
         newProp() {
