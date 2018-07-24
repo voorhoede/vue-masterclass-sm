@@ -1,4 +1,13 @@
-Vue.component('text-message', {
+<template>
+    <message v-bind:user="user" v-bind:date="date">
+        <!-- 
+            use slots to display the img of an cat (tip use the cat api: http://thecatapi.com/api/images/get?format=src&type=gif)
+        -->
+    </message>
+</template>
+
+<script>
+export default {
     props : {
         user : {
             type : Object,
@@ -10,16 +19,7 @@ Vue.component('text-message', {
         date : {
             type : Date,
             required : true
-        },
-        text : {
-            type : String,
-            required : true
         }
-    },
-
-    template : `
-        <message v-bind:user="user" v-bind:date="date">
-            <!-- use slots to display the content as text -->
-        </message>
-    `
-});
+    }
+}
+</script>
