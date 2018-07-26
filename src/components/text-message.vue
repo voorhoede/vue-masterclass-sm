@@ -1,6 +1,6 @@
 <template>
     <message v-bind:user="user" v-bind:date="date">
-        <template slot="content">{{ text }}</template>
+        
     </message>
 </template>
 
