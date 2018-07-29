@@ -17,6 +17,7 @@
     "rollup-plugin-serve": "0.4.2",
     "rollup-plugin-vue": "4.3.1",
     "vue": "2.5.16",
-    "vue-template-compiler": "2.5.16"
+    "vue-template-compiler": "2.5.16",
+    "vuex": "3.0.1"
   }
 }
