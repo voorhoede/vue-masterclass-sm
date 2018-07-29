@@ -9,19 +9,20 @@
 
 <script>
 import MessageList from "./message-list"
+import { mapState } from 'vuex';
 
 export default {
   components: {
     MessageList
   },
 
-  data() {
-    return window.chat;
-  },
-
   computed: {
     // implement your search functionality here as a computed property
     // use this.searchText as the search query. Search in this.messages
+    ...mapState({
+      messages: state => state.messages.items,
+      searchText: state => state.messages.searchText
+    }),
 
     filteredMessages() {
       return this.searchText !== ''

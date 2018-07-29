@@ -18,20 +18,17 @@ export default {
     MessageField,
     MessageList
   },
-  // data() {
-  //   return window.chat;
-  // },
   computed: {
     //return messages from the store (use ...saveMessage or $store.state)
-    messages() {
-      return [];
-    }
+    ...mapState({
+      messages: state => state.messages.items
+    })
   },
   methods: {
     // append a message by using the store action "saveMessage". Use mapActions or $store.dispatch
-    saveMessage(text) {
-      
-    }
+    ...mapActions([
+      'saveMessage'
+    ])
   }
 }
 </script>
