@@ -21,7 +21,7 @@ function createMessage(text) {
 
 export default {
     state: {
-        messages: [],
+        items: [],
         searchText: ''
     },
 
@@ -34,7 +34,7 @@ export default {
 
     mutations: {
         appendMessage(state, message) {
-            state.messages.push(message);
+            state.items.push(message);
         },
 
         setSearchText(state, text) {
