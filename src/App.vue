@@ -19,6 +19,7 @@ import SearchForm from './components/search-form.vue';
 import SearchSidebar from './components/search-sidebar.vue';
 import UserProfile from './components/user-profile.vue';
 
+// this is accessible through the browser devtools
 window.chat = {
     messages : []
 }
@@ -37,7 +38,7 @@ export default {
         UserProfile
     },
 
-    // make window.chat reactive here and try to manipulate it through the browser devtools
+    // make window.chat reactive here and try to manipulate window.chat through the browser devtools
 
     watch : {
         newProp() {
