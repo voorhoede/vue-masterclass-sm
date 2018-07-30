@@ -5,7 +5,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 
 export default {
-    input: 'main.js',
+    input: 'src/main.js',
     output: {
         file: 'dist/bundle.js',
         format: 'cjs'
